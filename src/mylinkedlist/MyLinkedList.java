@@ -68,6 +68,9 @@ public class MyLinkedList {
     }
     
     public void deleteFirst(){
+        if(head == null){
+            return;
+        }
         Node temp = head;
         head = temp.next;
         temp.next = null;
