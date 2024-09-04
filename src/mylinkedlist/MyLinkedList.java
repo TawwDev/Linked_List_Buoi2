@@ -26,7 +26,7 @@ public class MyLinkedList {
     
     public void addPosition(int index, int data){
         Node newNode = new Node (data);
-        if(index ==0){
+        if(index == 0){
             newNode.next = head;
             head = newNode; 
             return;
@@ -50,7 +50,7 @@ public class MyLinkedList {
     
     public int length(){
         Node temp = head;
-        int count =0;
+        int count = 0;
         while(temp != null){
             count ++;
             temp = temp.next;
@@ -72,9 +72,148 @@ public class MyLinkedList {
             return;
         }
         Node temp = head;
-        head = temp.next;
+        head = head.next;
         temp.next = null;
+        
     }
+    
+    public void deleteFirst2(){
+        if(head == null){
+            return;
+        }
+        head = head.next;
+    }
+    
+    public void deleteLast(){
+        if(head == null){
+            return;
+        }
+        Node current = head;
+        Node previous = null;
+        while(current.next!= null){
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null; 
+    }
+    
+    public void delete(int index){
+        if(index == 0){
+            head = head.next;
+            return;
+        } 
+        else if (index == length() - 1){
+            deleteLast();
+            return;
+        }
+        else{
+            Node previous = head;
+            for(int i = 0; i < index - 1; i++){
+                previous = previous.next;
+            }  
+            Node current = previous.next;
+            previous.next = current.next; 
+        }
+         
+    }
+    
+    public boolean search (int data){
+        if(head == null){
+            return false;
+        }
+        Node temp = head;
+        while (temp != null){
+            if(temp.data == data){
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+    
+    public Node searchPosition(int index){
+        if(index < 0 || index >= length()){
+            return null;
+        }
+        int count =0;
+        Node temp = head;
+        while (count < index){
+            temp = temp.next;
+            count ++;
+        }
+        return temp; 
+    }
+    
+    
+    //BTVN 1:
+    public void delete1(int index){
+        if(index == 0){
+            head = head.next;
+            return;
+        } else{
+            int count = 0;
+            Node previous = head;
+            while(count < index - 1){
+                previous = previous.next;
+                count++;
+            }
+            Node current = previous.next;
+            previous.next = current.next;
+        }  
+    }
+    
+    //BTVN 2: Viet ham sort().
+    public void sort(){
+        if(head == null || head.next == null){
+            return;
+        }
+        Node i, j;
+        for(i = head; i != null ; i = i.next){
+            for(j = i.next; j != null ; j = j.next){
+                if(i.data > j.data){
+                    //swap data node i voi j
+                    int temp = i.data;
+                    i.data = j.data;
+                    j.data = temp;
+                }
+            }
+        } 
+    }
+    
+    //BTVN 3: 
+    /*  1.
+        for(int i = 0; i < index; i++){
+            temp = temp.next;
+        }
+        previous la node tai vi tri index
+        2.
+        for(int i = 0; i < index - 1; i++){
+            temp = temp.next;
+        }   
+        previous la vi tri truoc index.
+    
+        // 5 3 2 1 4
+        1.với index = 3;
+            vòng for chạy từ 0 đến < 3
+            do temp = head => temp.data = 5;
+            với i = 0;
+            temp.data = 3
+            i = 1;
+            temp.data = 2;
+            i = 2;
+            temp.data = 1;
+            i = 3 thì vòng lặp dừng
+        2.với index = 3;
+            vòng for chạy từ 0 đến < 2
+            do temp = head => temp.data = 5;
+            i = 0;
+            previous = 3
+            i = 1;
+            previous.data = 2;
+            
+            
+        
+    */
     
     
 }
